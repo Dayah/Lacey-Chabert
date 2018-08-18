@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo -n "
+ Downloaded as $1 from www.lacey-chabert.com on `date` by $2
+ Take this wine and drink with me. Lets delay our misery. (dbaker)
+"|tr "abcdefghijklmnopqrstuvwxyz() 1234567890.:" "0987654321;:,.@#$%^&*()_=+abcdefghjiklomn"

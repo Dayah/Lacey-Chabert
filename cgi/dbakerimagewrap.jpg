@@ -1,0 +1,48 @@
+#!/bin/sh
+
+###
+### This code is the exclusive
+### intellectual property
+### of Daniel Baker <dbaker@neosoft.com>
+###
+### Distribution is prohibited. Violators will be prosecuted.
+###
+### This software is not to be used on any machines outside
+### of the Cuckoo Advanced Networking Solutions CUCKOO.COM
+### domain.
+###
+### The only knowledge that can be gained from viewing
+### this code must be that of understanding the internals
+### of the program.  Anything else must be disregarded.
+###
+### This software is licensed for use by Michael Dayah for
+### a one-year period beginning August 8, 1998 and ending
+### August 8, 1999.  At the end of the above-mentioned period,
+### the agreement can be re-evaluated and possible re-licensed.
+###
+### Copyright (c) 1998 Daniel A. Baker
+###
+
+WEBSITE_DOMAIN="lacey-chabert.com"
+code=`date +%s`
+
+referer=`echo $HTTP_REFERER|grep -i $WEBSITE_DOMAIN|wc -l|tr -s " "|cut -d" " -f2`
+
+#if [ $referer = "0" ]; then
+# echo "Location: http://www.$WEBSITE_DOMAIN/"
+# exit
+#fi
+
+if [ -f /htdocs/virtual/www.lacey-chabert.com/media/images/$1.jpg ]; then
+ realname=/htdocs/virtual/www.lacey-chabert.com/media/images/$1.jpg
+ /bin/dd if=$realname of=/htdocs/virtual/www.lacey-chabert.com/tmp/$1.$code.jpg >& /dev/null
+ /htdocs/virtual/www.lacey-chabert.com/dbakerimageexpire /htdocs/virtual/www.lacey-chabert.com/tmp/$1.$code.jpg &
+echo "
+Location: http://www.lacey-chabert.com/tmp/$1.$code.jpg
+
+
+"
+
+fi
+
+exit

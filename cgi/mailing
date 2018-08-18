@@ -1,0 +1,18 @@
+#!/usr/local/bin/bash
+
+if [ ! -z "$QUERY_STRING" ]; then
+  querydata="`echo "$QUERY_STRING" | tr '&' '\n'`"
+  for varname in `echo "$querydata" | cut -d= -f1` ; do
+    eval WWW_$varname=`echo "$querydata" | head -1 | cut -d= -f2-`
+    querydata="`echo "$querydata" | tail +2`"
+  done
+  unset varname
+  unset querydata
+fi
+
+cat /htdocs/danielle/templates/htmlcgi
+echo "<title>Lacey Chabert Mailing List!</title><body bgcolor=#FFFFFF><center>"
+echo "<h1>Lacey Chabert Mailing List!</h1>"
+echo "You have been added! Check your mail!"
+echo "subscribe lacey-chabert $WWW_email" |/usr/sbin/sendmail majordomo@cuckoo.com
+echo "</body></html>"

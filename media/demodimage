@@ -1,0 +1,9 @@
+#!/bin/sh
+
+read one
+read two
+
+echo -n "
+echo $one
+echo $two
+"|tr "0987654321;:,.@#$%^&*()_=+abcdefghjiklomn" "abcdefghijklmnopqrstuvwxyz() 1234567890.:"
